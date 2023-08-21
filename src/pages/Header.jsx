@@ -1,7 +1,9 @@
 import { ShoppingBag } from '@mui/icons-material';
-import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import { styled } from "@mui/system";
-import React from 'react';
+import React, { useState } from 'react';
+import MyButton from '../components/UI/MyButton';
+import Basket from '../components/Basket';
 
 const navItems = ['Главная', 'О нас', 'Контакты'];
 
@@ -12,18 +14,14 @@ const StyledTypography = styled(Typography)`
    color: ${({ theme }) => theme.colors.heading};
 `
 
-const StyledButton = styled(Button)`
-   color: ${({ theme }) => theme.colors.textNav};
-   &:hover {
-      background-color: ${({ theme }) => theme.colors.hoverbgNav};
-      color: ${({ theme }) => theme.colors.hoverTextNav};
-   };
-`
-
 const Header = () => {
+
+   const [isOpen, setIsOpen] = useState(false);
+
    return (
       <AppBar position='static'>
          <StyledToolbar>
+
             <StyledTypography
                variant='h6'
                component='span'
@@ -31,23 +29,31 @@ const Header = () => {
             >
                My Shop
             </StyledTypography>
-            <Box>
-               <StyledButton >
-                  Домашняя
-               </StyledButton>
-               <StyledButton >
-                  О нас
-               </StyledButton>
-               <StyledButton >
-                  Контакты
-               </StyledButton>
+
+            <Box
+               sx={{ mr: 5 }}
+            >
+               {navItems.map(item => {
+                  return (
+                     <MyButton key={item}>
+                        {item}
+                     </MyButton>
+                  )
+               })}
             </Box>
+
             <IconButton
                color='inherit'
+               onClick={() => setIsOpen(true)}
             >
                <ShoppingBag />
             </IconButton>
+
          </StyledToolbar>
+         <Basket
+            isOpen={isOpen}
+            closeBasket={() => setIsOpen(false)}
+         />
       </AppBar>
    );
 };

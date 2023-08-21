@@ -1,30 +1,25 @@
 import React from 'react';
-import Header from './Header';
+import Header from '../pages/Header';
 import { ThemeProvider, createTheme } from '@mui/material';
+import Shop from '../pages/Shop';
 
 const theme = createTheme({
    colors: {
       main: 'rgb(23, 23, 23)',
       bgNavBar: '#61ABDA',
 
-      textNav: '#042B44',
-      bgNav: '#61ABDA',
+      darkBlue: '#042B44',
+      lightBlue: '#61ABDA',
 
-      hoverTextNav: '#61ABDA',
-      hoverbgNav: '#042B44',
-
-      heading: 'white',
+      heading: '#A1E65F',
    }
 });
 
 const App = () => {
    return (
       <ThemeProvider theme={theme}>
-         <div className='App'>
-            <div className='container'>
-               <Header />
-            </div>
-         </div>
+         <Header />
+         <Shop />
       </ThemeProvider>
    );
 };

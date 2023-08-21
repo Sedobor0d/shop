@@ -31,7 +31,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
    },
 }));
 
-const Search = () => {
+const Search = ({ textInput, change }) => {
    return (
       <SearchConteiner>
          <SearchIconWrapper>
@@ -39,6 +39,8 @@ const Search = () => {
          </SearchIconWrapper>
          <StyledInputBase
             placeholder="Поиск…"
+            value={textInput}
+            onChange={change}
             inputProps={{ 'aria-label': 'search' }}
          />
       </SearchConteiner>

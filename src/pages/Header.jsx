@@ -1,5 +1,5 @@
 import { ShoppingBag } from '@mui/icons-material';
-import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Badge, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import { styled } from "@mui/system";
 import React, { useState } from 'react';
 import MyButton from '../components/UI/MyButton';
@@ -14,9 +14,7 @@ const StyledTypography = styled(Typography)`
    color: ${({ theme }) => theme.colors.heading};
 `
 
-const Header = () => {
-
-   const [isOpen, setIsOpen] = useState(false);
+const Header = ({ setIsOpen, countSelectedProducts }) => {
 
    return (
       <AppBar position='static'>
@@ -46,14 +44,15 @@ const Header = () => {
                color='inherit'
                onClick={() => setIsOpen(true)}
             >
-               <ShoppingBag />
+               <Badge
+                  color='secondary'
+                  badgeContent={1}
+               >
+                  <ShoppingBag />
+               </Badge>
             </IconButton>
 
          </StyledToolbar>
-         <Basket
-            isOpen={isOpen}
-            closeBasket={() => setIsOpen(false)}
-         />
       </AppBar>
    );
 };

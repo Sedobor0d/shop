@@ -2,7 +2,8 @@ import { Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mu
 import React from 'react';
 import MyButton from './UI/MyButton';
 
-const GoodsItem = ({ item }) => {
+const GoodsItem = ({ item, addItem }) => {
+
    return (
       <Grid item xs={4} ms={8}>
          <Card sx={{ maxWidth: 340 }}>
@@ -28,12 +29,15 @@ const GoodsItem = ({ item }) => {
             </CardContent>
 
             <CardActions>
-               <MyButton size="small" color="primary">
+               <MyButton
+                  size="small"
+                  onClick={() => addItem(item)}
+               >
                   Купить
                </MyButton>
             </CardActions>
          </Card>
-      </Grid>
+      </Grid >
    );
 };
 

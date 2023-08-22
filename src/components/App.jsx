@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../pages/Header';
 import { ThemeProvider, createTheme } from '@mui/material';
 import Shop from '../pages/Shop';
@@ -16,10 +16,13 @@ const theme = createTheme({
 });
 
 const App = () => {
+
+   const [isOpen, setIsOpen] = useState(false); //Состояние откртия окна корзины
+
    return (
       <ThemeProvider theme={theme}>
-         <Header />
-         <Shop />
+         <Header setIsOpen={setIsOpen} />
+         <Shop isOpen={isOpen} setIsOpen={setIsOpen} />
       </ThemeProvider>
    );
 };

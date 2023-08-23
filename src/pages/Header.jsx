@@ -1,11 +1,12 @@
+import React from 'react';
 import { ShoppingBag } from '@mui/icons-material';
 import { AppBar, Badge, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import { styled } from "@mui/system";
-import React, { useState } from 'react';
-import MyButton from '../components/UI/MyButton';
-import Basket from '../components/Basket';
+import { useDispatch, useSelector } from 'react-redux';
 
-const navItems = ['Главная', 'О нас', 'Контакты'];
+import MyButton from '../components/UI/MyButton';
+import { setIsOpen } from '../components/store/basketSlice';
+
 
 const StyledToolbar = styled(Toolbar)`
    background-color: ${({ theme }) => theme.colors.bgNavBar};
@@ -14,7 +15,12 @@ const StyledTypography = styled(Typography)`
    color: ${({ theme }) => theme.colors.heading};
 `
 
-const Header = ({ setIsOpen, countSelectedProducts }) => {
+const Header = () => {
+
+   const dispatch = useDispatch();
+   const countSelectedProducts = useSelector(state => state.basket.quantity)
+
+   const navItems = ['Главная', 'О нас', 'Контакты'];
 
    return (
       <AppBar position='static'>
@@ -23,7 +29,7 @@ const Header = ({ setIsOpen, countSelectedProducts }) => {
             <StyledTypography
                variant='h6'
                component='span'
-               sx={{ flexGrow: 1 }}
+               sx={{ flexGrow: 1, cursor: 'pointer' }}
             >
                My Shop
             </StyledTypography>
@@ -42,11 +48,11 @@ const Header = ({ setIsOpen, countSelectedProducts }) => {
 
             <IconButton
                color='inherit'
-               onClick={() => setIsOpen(true)}
+               onClick={() => dispatch(setIsOpen(true))}
             >
                <Badge
                   color='secondary'
-                  badgeContent={1}
+                  badgeContent={countSelectedProducts}
                >
                   <ShoppingBag />
                </Badge>

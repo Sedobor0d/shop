@@ -1,8 +1,12 @@
 import { Close } from '@mui/icons-material';
 import { IconButton, ListItem, Typography } from '@mui/material';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { removeItemFromBasket } from './store/basketSlice';
 
-const BasketItem = ({ name, price, id, removeItem }) => {
+const BasketItem = ({ name, price, id }) => {
+   const dispatch = useDispatch();
+
    return (
       <ListItem>
          <Typography
@@ -11,11 +15,11 @@ const BasketItem = ({ name, price, id, removeItem }) => {
             {name} {price} руб.
          </Typography>
          <IconButton
-            onClick={() => removeItem(id)}
+            onClick={() => dispatch(removeItemFromBasket({ id }))}
          >
             <Close />
          </IconButton>
-      </ListItem>
+      </ListItem >
    );
 };
 

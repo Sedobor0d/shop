@@ -1,16 +1,18 @@
+import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import { InputBase, alpha, styled } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 
-import React from 'react';
+import { handleChangeInput } from './store/filterProductSlice';
 
 const SearchConteiner = styled('div')(({ theme }) => ({
    position: 'relative',
    width: '80%',
    borderRadius: theme.shape.borderRadius,
-   backgroundColor: alpha(theme.palette.common.white, 0.15),
+   backgroundColor: alpha(theme.palette.common.black, 0.15),
    margin: '0 auto 20px',
    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
+      backgroundColor: alpha(theme.palette.common.black, 0.25),
    },
 }));
 
@@ -31,7 +33,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
    },
 }));
 
-const Search = ({ textInput, change }) => {
+const Search = () => {
+
+   const dispatch = useDispatch();
+   const textInput = useSelector(state => state.product.textInput);
+
    return (
       <SearchConteiner>
          <SearchIconWrapper>
@@ -40,7 +46,7 @@ const Search = ({ textInput, change }) => {
          <StyledInputBase
             placeholder="Поиск…"
             value={textInput}
-            onChange={change}
+            onChange={(e) => dispatch(handleChangeInput(e.target.value))}
             inputProps={{ 'aria-label': 'search' }}
          />
       </SearchConteiner>

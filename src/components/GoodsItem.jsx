@@ -1,8 +1,11 @@
 import { Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import React from 'react';
 import MyButton from './UI/MyButton';
+import { useDispatch } from 'react-redux';
+import { addProductToBasket } from './store/basketSlice';
 
-const GoodsItem = ({ item, addItem }) => {
+const GoodsItem = ({ item }) => {
+   const dispatch = useDispatch();
 
    return (
       <Grid item xs={4} ms={8}>
@@ -31,7 +34,7 @@ const GoodsItem = ({ item, addItem }) => {
             <CardActions>
                <MyButton
                   size="small"
-                  onClick={() => addItem(item)}
+                  onClick={() => dispatch(addProductToBasket({ item }))}
                >
                   Купить
                </MyButton>

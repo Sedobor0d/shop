@@ -1,8 +1,10 @@
 import React from 'react';
 import GoodsItem from './GoodsItem';
 import { Grid } from '@mui/material';
+import { useSelector } from 'react-redux';
 
-const GoodsList = ({ goods, addItem }) => {
+const GoodsList = () => {
+   const goods = useSelector(state => state.product.product)
 
    return (
       <Grid
@@ -10,7 +12,7 @@ const GoodsList = ({ goods, addItem }) => {
          spacing={2}
       >
          {goods.map((item) => (
-            <GoodsItem key={item.id} item={item} addItem={addItem} />
+            <GoodsItem key={item.id} item={item} />
          ))}
       </Grid>
    );

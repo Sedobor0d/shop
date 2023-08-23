@@ -2,13 +2,22 @@ import { ShoppingBag } from '@mui/icons-material';
 import { Divider, Drawer, List, ListItem, ListItemText, Typography } from '@mui/material';
 import React from 'react';
 import BasketItem from './BasketItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsOpen } from './store/basketSlice';
 
-const Basket = ({ isOpen, closeBasket, selectedProducts, removeItem }) => {
+const Basket = () => {
+
+   const dispatch = useDispatch();
+   const { selectedProducts, isOpen } = useSelector(state => ({
+      selectedProducts: state.basket.selectedProducts,
+      isOpen: state.basket.isOpen,
+   }));
+
    return (
       <Drawer
          anchor='right'
          open={isOpen}
-         onClose={closeBasket}
+         onClose={() => dispatch(setIsOpen(false))}
          sx={{ margin: '0 auto' }}
       >
          <List sx={{ width: '300px' }}>
@@ -22,7 +31,7 @@ const Basket = ({ isOpen, closeBasket, selectedProducts, removeItem }) => {
             {selectedProducts.length ? (
                <>
                   {selectedProducts.map(item => (
-                     <BasketItem key={item.id} {...item} removeItem={removeItem} />
+                     <BasketItem key={item.id} {...item} />
                   ))}
                   <Divider />
                   <ListItem>

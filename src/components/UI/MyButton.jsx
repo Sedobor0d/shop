@@ -3,6 +3,7 @@ import React from 'react';
 
 const StyledButton = styled(Button)`
    color: ${({ theme }) => theme.colors.darkBlue};
+   background-color: ${({ theme }) => theme.colors.lightBlue};
    &:hover {
       background-color: ${({ theme }) => theme.colors.darkBlue};
       color: ${({ theme }) => theme.colors.lightBlue};

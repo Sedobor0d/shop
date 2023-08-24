@@ -11,7 +11,6 @@ export const fetchProducts = createAsyncThunk(
          }
 
          const data = await response.json();
-         console.log(data.products)
          return data.products;
 
       } catch (error) {
@@ -39,7 +38,7 @@ const filterProductSlice = createSlice({
          state.textInput = action.payload
 
          state.filterProducts = (state.products.filter(item => //Отображение отфильтрованных товаров по введенному тексту
-            item.title.toLowerCase().includes(action.payload.toLowerCase())
+            item.title.toLowerCase().includes(action.payload.toLowerCase().trim())
          ))
       },
    },
@@ -47,11 +46,11 @@ const filterProductSlice = createSlice({
       [fetchProducts.pending]: (state) => {
          state.status = 'pending'
          state.error = null
-
       },
       [fetchProducts.fulfilled]: (state, action) => {
          state.status = 'resolved'
-         state.products = action.payload //trr
+         state.filterProducts = action.payload
+         state.products = action.payload
          state.error = null
       },
       [fetchProducts.rejected]: (state, action) => {

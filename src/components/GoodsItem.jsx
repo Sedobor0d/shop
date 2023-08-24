@@ -2,7 +2,7 @@ import { Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mu
 import React from 'react';
 import MyButton from './UI/MyButton';
 import { useDispatch } from 'react-redux';
-import { addProductToBasket } from './store/basketSlice';
+import { addProductAsync } from './store/basketSlice';
 
 const GoodsItem = ({ item }) => {
    const dispatch = useDispatch();
@@ -30,21 +30,24 @@ const GoodsItem = ({ item }) => {
                </Typography>
                <Typography
                   variant='body2'
+
                >
                   Цена: {item.price} руб.
                </Typography>
             </CardContent>
 
-            <CardActions
-               sx={{ position: 'absolute', bottom: '0' }}
-            >
-               <MyButton
-                  size="small"
-                  onClick={() => dispatch(addProductToBasket({ item }))}
-               >
-                  Купить
-               </MyButton>
+            <CardActions>
+               <CardContent
+                  sx={{ position: 'absolute', bottom: '0', left: '0' }}>
+                  <MyButton
+                     size="small"
+                     onClick={() => dispatch(addProductAsync({ item }))}
+                  >
+                     Купить
+                  </MyButton>
+               </CardContent>
             </CardActions>
+
          </Card>
       </Grid >
    );

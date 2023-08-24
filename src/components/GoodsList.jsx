@@ -13,7 +13,6 @@ const GoodsList = () => {
       dispatch(fetchProducts())
    }, [dispatch])
 
-
    return (
       <Grid
          container

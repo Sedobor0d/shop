@@ -8,10 +8,7 @@ import { setIsOpen } from './store/basketSlice';
 const Basket = () => {
 
    const dispatch = useDispatch();
-   const { selectedProducts, isOpen } = useSelector(state => ({
-      selectedProducts: state.basket.selectedProducts,
-      isOpen: state.basket.isOpen,
-   }));
+   const { selectedProducts, isOpen } = useSelector(state => state.basket);
 
    return (
       <Drawer

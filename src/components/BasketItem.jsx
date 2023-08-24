@@ -2,7 +2,7 @@ import { Close } from '@mui/icons-material';
 import { IconButton, ListItem, Typography } from '@mui/material';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { removeItemFromBasket } from './store/basketSlice';
+import { deleteProductAsync } from './store/basketSlice';
 
 const BasketItem = ({ title, price, id }) => {
    const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const BasketItem = ({ title, price, id }) => {
             {title} {price} руб.
          </Typography>
          <IconButton
-            onClick={() => dispatch(removeItemFromBasket({ id }))}
+            onClick={() => dispatch(deleteProductAsync({ id }))}
          >
             <Close />
          </IconButton>

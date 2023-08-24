@@ -9,20 +9,24 @@ const GoodsItem = ({ item }) => {
 
    return (
       <Grid item xs={4} ms={8}>
-         <Card sx={{ maxWidth: 340 }}>
+         <Card sx={{
+            width: '340px',
+            height: '290px',
+            position: 'relative',
+         }}>
 
             <CardContent>
                <CardMedia
                   component="img"
-                  height="140"
-                  image={item.poster}
-                  alt={item.name}
+                  height="130"
+                  image={item.images[0]}
+                  alt={item.title}
                />
                <Typography
                   variant='body1'
-                  sx={{ fontWeight: '600' }}
+                  sx={{ fontWeight: '600', marginTop: '10px' }}
                >
-                  {item.name}
+                  {item.title}
                </Typography>
                <Typography
                   variant='body2'
@@ -31,7 +35,9 @@ const GoodsItem = ({ item }) => {
                </Typography>
             </CardContent>
 
-            <CardActions>
+            <CardActions
+               sx={{ position: 'absolute', bottom: '0' }}
+            >
                <MyButton
                   size="small"
                   onClick={() => dispatch(addProductToBasket({ item }))}

@@ -4,7 +4,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { removeItemFromBasket } from './store/basketSlice';
 
-const BasketItem = ({ name, price, id }) => {
+const BasketItem = ({ title, price, id }) => {
    const dispatch = useDispatch();
 
    return (
@@ -12,7 +12,7 @@ const BasketItem = ({ name, price, id }) => {
          <Typography
             variant='body1'
          >
-            {name} {price} руб.
+            {title} {price} руб.
          </Typography>
          <IconButton
             onClick={() => dispatch(removeItemFromBasket({ id }))}

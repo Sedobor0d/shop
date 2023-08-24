@@ -1,26 +1,66 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { goods } from "../../data/goods";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+export const fetchProducts = createAsyncThunk(
+   'product/fetchProducts',
+   async function (_, { rejectWithValue }) {
+      try {
+         const response = await fetch('https://dummyjson.com/products?limit=10');
+
+         if (!response.ok) {
+            throw new Error('An unexpected error occurred');
+         }
+
+         const data = await response.json();
+         console.log(data.products)
+         return data.products;
+
+      } catch (error) {
+         return rejectWithValue(error.message);
+      }
+   }
+)
 
 const filterProductSlice = createSlice({
    name: 'product',
    initialState: {
-      product: goods,
+      products: [],
+      filterProducts: [],
       textInput: '',
+      status: null,
+      error: null,
    },
    reducers: {
       handleChangeInput(state, action) {
          if (!action.payload) {
-            state.product = goods
+            state.filterProducts = state.products
             state.textInput = ''
             return
          }
          state.textInput = action.payload
-         state.product = (goods.filter(item =>
-            item.name.toLowerCase().includes(action.payload.toLowerCase())
+
+         state.filterProducts = (state.products.filter(item => //Отображение отфильтрованных товаров по введенному тексту
+            item.title.toLowerCase().includes(action.payload.toLowerCase())
          ))
+      },
+   },
+   extraReducers: {
+      [fetchProducts.pending]: (state) => {
+         state.status = 'pending'
+         state.error = null
+
+      },
+      [fetchProducts.fulfilled]: (state, action) => {
+         state.status = 'resolved'
+         state.products = action.payload //trr
+         state.error = null
+      },
+      [fetchProducts.rejected]: (state, action) => {
+         state.status = 'rejected'
+         state.error = action.payload
       },
    }
 });
+
 
 export const { handleChangeInput } = filterProductSlice.actions;
 

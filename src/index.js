@@ -2,10 +2,11 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import './index.css';
 import App from './components/App';
-import store from './components/store/index'
+import store, { persister } from './components/store/index'
 
 const theme = createTheme({
     colors: {
@@ -24,9 +25,11 @@ const root = createRoot(container);
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <ThemeProvider theme={theme}>
-                <App tab="home" />
-            </ThemeProvider>
+            <PersistGate loading={null} persistor={persister}>
+                <ThemeProvider theme={theme}>
+                    <App tab="home" />
+                </ThemeProvider>
+            </PersistGate>
         </Provider>
     </React.StrictMode>
 );

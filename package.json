@@ -27,7 +27,9 @@
     "server": "json-server --watch server/db.json -p 3001",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "concurrently \"npm run predeploy\" \"gh-pages -d build\""
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +52,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "concurrently": "^8.2.1",
+    "gh-pages": "^6.1.1",
     "json-server": "^0.17.3"
   }
 }

@@ -37,7 +37,7 @@ const filterProductSlice = createSlice({
          }
          state.textInput = action.payload
 
-         state.filterProducts = (state.products.filter(item => //Отображение отфильтрованных товаров по введенному тексту
+         state.filterProducts = (state.products.filter(item =>
             item.title.toLowerCase().includes(action.payload.toLowerCase().trim())
          ))
       },

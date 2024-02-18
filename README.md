@@ -1,6 +1,6 @@
 # GitHub Pages
 
-[https://sedobor0d.github.io/SwiftBiz/](https://sedobor0d.github.io/shop/)
+[https://sedobor0d.github.io/shop/](https://sedobor0d.github.io/shop/)
 
 ## Description
 
